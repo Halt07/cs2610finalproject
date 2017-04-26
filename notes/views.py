@@ -10,21 +10,6 @@ class ListView(generic.ListView):
   template_name = 'notes/note_list.html'
   context_object_name = 'notes_list'
   
-  def save(self):
-      if self.instance.pk:
-          return super(ListView, self).save()
-          
-      instance = super(ListView, self).save(commit=False)
-      instance.slug = orig = slugify(instance.title)
-      
-      for x in itertools.count(1):
-          if not Note.objects.filter(slug=instance.slug).exists():
-              break
-          instance.slug = '%s-%d' % (orig, x)
-          
-      instance.save()
-      
-      return instance
   
   def get_queryset(self):
       """Return list of notes."""
@@ -48,11 +33,8 @@ def create_note(request):
     
 def update_note(request, slug):
     if request.method == "POST":
-        post = get_object_or_404(Note, slug=slug)
-        note = Note.objects.get(slug=slug)
-        if Note.slug.count() > 0:
-            error_msg = u"Slug already taken."
-            return HttpResponseServerError(error_msg)
+        post = get_object_or_404(Note, pk=slug)
+        note = Note.objects.get(pk=slug)
         if post.has_key('title'):
             note.title = post['title']
         if post.has_key('text'):

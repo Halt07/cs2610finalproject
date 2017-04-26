@@ -10,22 +10,23 @@
             <input class="button" type="submit" value="Create Note">
         </form>
     </div>
-</div>
-<div id="secondaryContent">
-    <h3> Notes </h3>
-    {% if notes_list %}
-        <ol id="notes">
-            {% for Note in notes_list %}
-                <li><a href="{{ Note.get_absolute_url }}">{{ Note.title }}</a></li>
-            {% endfor %}
-        </ol>
-    {% else %}
-        <p>No Notes Stored</p>
-    {% endif %}
+
+    <div id="secondaryContent">
+        <h3> Notes </h3>
+        {% if notes_list %}
+            <ul id="notes">
+                {% for Note in notes_list %}
+                    <li class="scrap"><a href="{{ Note.get_absolute_url }}">{{ Note.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No Notes Stored</p>
+        {% endif %}
+    </div>
 </div>
 <script>
     var create_note = function() {
-        var title = $("#title").val()
+        var title = document.querySelector("#title").val()
         if (title != "") {
             var data = {title:title};
             var args = { type:"POST", url:"/create/", data:data, complete:done };
@@ -42,9 +43,9 @@
             var txt = res.responseText;
             var titleStr = txt.match(/id="title" value="\w+"/ig)[0];
             var title = titleStr.match(/"\w+"/ig)[1].replace(/"/g,'');
-            var newLi = $('<li><a href="{{ Note.get_absolute_url }}">'+title+'</a></li>');
-            $("#notes").prepend(newLi);
-            $("#title").val("");
+            var newLi = $('<li><a href="{{ object.get_absolute_url }}">'+title+'</a></li>');
+            document.querySelector("#notes").prepend(newLi);
+            ducument.querySelector("#title").val("");
         }
         else {
             //Todo: display explanation of failure

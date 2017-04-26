@@ -36,8 +36,11 @@ a:hover{
 /* Header */
 
 #header{
+	margin: 0em 20%;
 	padding: 1.75em;
 	text-align: center;
+	position: relative;
+	z-index: 2;
 	}
 
 #header h1{
@@ -57,9 +60,9 @@ a:hover{
 /* Menu */
 
 #menu	{
-	background: #000000 url('images/a1.jpg') top left no-repeat;
+	background: #000000 url('images/a1.jpg') top center no-repeat;
 	height: 94px;
-	width: 778px;
+	width: 90%;
 	}
 
 #menu ul	{
@@ -92,13 +95,14 @@ a:hover{
 #xbg1{
 	position: absolute;
 	z-index: 1;
-	background: #000000 url('images/a2.jpg') top left no-repeat;
-	width: 778px;
+	background: #000000 url('images/a2.jpg') top center no-repeat;
+	width: 90%;
 	height: 98px;
 	}
 
 #content{
-	background: #000000 url('images/a3.jpg') top left repeat-y;
+	background: #000000 url('images/a3.jpg') top center repeat-y;
+	width: 90%;
 	}
 
 #content p{
@@ -122,9 +126,9 @@ a:hover{
 	font-size: 1.1em;
 	}
 
-#content ol{
+#content ul{
+	list-style-type: none;
 	margin-bottom: 2em;
-	padding-left: 1em;
 	}
 
 #content blockquote{
@@ -141,22 +145,22 @@ a:hover{
 	margin-bottom: 2em;
 	}
 
-#content table th{
+#content th{
 	text-align: left;
 	font-weight: bold;
 	padding: 0.5em;
 	}
 
-#content table td{
+#content td{
 	padding: 0.5em;
 	}
 
-#content table tr.rowA{
+#content tr:nth-child(even){
 	background-color: #DFBD99;
 	color: inherit;
 	}
 
-#content table tr.rowB{
+#content tr:nth-child(odd){
 	background-color: #EFDCC2;
 	color: inherit;
 	}
@@ -166,34 +170,75 @@ a:hover{
 #primaryContentContainer{
 	position: relative;
 	z-index: 2;
-	float: right;
-	margin-left: -18em;
-	width: 100%;
+	margin: auto;
+	width: 750px;
 	}
+	
+.text{
+	font-size: medium;
+	padding: 4px 10em;
+}
+
+.text .button{
+	margin-left: 40%;
+	margin-right: 40%;
+}
+
+#text{
+	position: relative;
+	width: 30em;
+	height: 5em;
+}
 
 #primaryContent{
-	margin: 2em 3.0em 0em 19em;
+	margin: 2em 3.0em 0em 0em;
 	padding: 0em 0em 0em 1.5em;
 	border-left: solid 1px #DFBF99;
+	width: 34em;
+	float: right;
 	}
+	
 
 /* Secondary Content */
 
 #secondaryContent{
 	position: relative;
 	z-index: 2;
-	float: right;
+	float: left;
 	width: 15em;
 	margin-top: 2em;
+	padding-left: 1em;
 	}
+	
+.scrap:nth-child(even){
+	position: relative;
+	z-index: 1;
+	background: transparent url('images/scrap2.png') top center no-repeat;
+	text-align: center;
+	width: 200px;
+	height: 48px;
+}
+
+.scrap:nth-child(odd){
+	position: relative;
+	z-index: 1;
+	background: transparent url('images/scrap1.png') top center no-repeat;
+	text-align: center;
+	width: 200px;
+	height: 48px;
+}
+
+.scrap a{
+	vertical-align: -70%;
+}
 
 /* Footer */
 
 #footer{
-	width: 778px;
+	width: 90%;
 	height: 56px;
 	padding-top: 30px;
-	background: #000000 url('images/a4.jpg') top left no-repeat;
+	background: #000000 url('images/a4.jpg') top center no-repeat;
 	text-align: center;
 	}
 
