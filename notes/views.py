@@ -3,7 +3,7 @@ from models import Note
 from django.http import HttpResponseRedirect, HttpResponseServerError
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from django.utils.text import slugify
+from django.core.urlresolvers import reverse
 
 class ListView(generic.ListView):
   model = Note
@@ -31,15 +31,15 @@ def create_note(request):
             error_msg = u"Insufficient Data, Please provide a Note Title.)"
     return HttpResponseServerError(error_msg)
     
-def update_note(request, slug):
+def update_note(request, note_id):
     if request.method == "POST":
-        post = get_object_or_404(Note, pk=slug)
-        note = Note.objects.get(pk=slug)
+        post = request.POST.copy()
+        note = get_object_or_404(Note, pk=note_id)
         if post.has_key('title'):
             note.title = post['title']
         if post.has_key('text'):
             note.text = post['text']
         note.save()
-        return HttpResponseRedirect(note.get_absolute_url())
+        return HttpResponseRedirect(reverse('detail', args=(note.id,)))
     error_msg = u"No POST data sent."
     return HttpResponseServerError(error_msg)

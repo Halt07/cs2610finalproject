@@ -5,12 +5,62 @@
 </div>
 <div id="primaryContentContainer">
     <form method="post" action="update/">
+    {% csrf_token %}
         <div class="text">
-            <label for="title">Title</label>
+            <label for="title">Title:</label>
             <input type="text" name="title" id="title" value="{{ object.title }}">
             <textarea name="text" id="text">{{ object.text }}</textarea>
             <input class="button" type="submit" value="Update Note">
         </div>
     </form>
 </div>
+<script>
+    $(document).ready(function() {
+        /*var initTitleChange = true;*/
+        var title_to_input = function() {
+           var title = $("#title");
+           var input = $('<input type="text" name="title" id="title" value="'+title.text()+'">');
+           input.hover(function() {}, title_to_span);
+           title.replaceWith(input);
+        };
+        var title_to_span = function() {
+           var title = $("#title");
+           /*if (initTitleChange) initTitleChange = false;
+           else perform_update("title", title.val());*/
+           var span = $('<span id="title">'+title.val()+'</span>');
+           span.hover(title_to_input,function() {});
+           title.replaceWith(span);
+        };
+        var text_to_textarea = function() {
+           var text = $("#text");
+           var textarea = $('<textarea name="text" id="text">'+text.text()+'</textarea>');
+           textarea.hover(function() {}, text_to_p);
+           text.replaceWith(textarea);
+        };
+        var text_to_p = function() {
+           var text = $("#text");
+           var p = $('<p id="text">'+text.text()+'</p>');
+           p.hover(text_to_textarea,function() {});
+           text.replaceWith(p);
+        };
+        var perform_update = function(field, val) {
+           var data = {};
+           data[field] = val;
+           var args = { type:"POST", url:"update/", data:data, complete:done };
+           $.ajax(args);
+        };
+        var done = function(res, status) {
+            if (status == "success") display_success("Updated successfully.", $("#text"));
+            else display_error(res.responseText, $("#text"));
+        };
+        var button_input_change = function(){
+            title_to_input();
+            text_to_textarea();
+        }
+        title_to_span();
+        text_to_p();
+        $(".button").click(button_input_change);
+        /*$("#text").hover(function() {}, function() { perform_update("text", $("#text").text()); });*/
+    });
+</script>
 {% endblock %}

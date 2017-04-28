@@ -25,7 +25,7 @@ SECRET_KEY = '0%20p^w+-8zh*i4s7%-#se&!1_0*_se6)dv(%v=j(rl+4f=ra6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['djangofinal-halt07.c9users.io']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 

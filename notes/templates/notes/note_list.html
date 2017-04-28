@@ -26,14 +26,14 @@
 </div>
 <script>
     var create_note = function() {
-        var title = document.querySelector("#title").val()
+        var title = $("#title").val()
         if (title != "") {
             var data = {title:title};
             var args = { type:"POST", url:"/create/", data:data, complete:done };
             $.ajax(args);
         }
         else {
-            //Todo: display explanation of failure
+            display_error("Value for title required", $(".new"));
         }
         return false;
     };
@@ -43,12 +43,13 @@
             var txt = res.responseText;
             var titleStr = txt.match(/id="title" value="\w+"/ig)[0];
             var title = titleStr.match(/"\w+"/ig)[1].replace(/"/g,'');
-            var newLi = $('<li><a href="{{ object.get_absolute_url }}">'+title+'</a></li>');
-            document.querySelector("#notes").prepend(newLi);
-            ducument.querySelector("#title").val("");
+            var newLi = $('<li class="scrap"><a href="{{Note.get_absolute_url}}">'+title+'</a></li>');
+            
+            $("#notes").append(newLi);
+            $("#title").val("");
         }
         else {
-            //Todo: display explanation of failure
+            display_error(res.responseText, $(".new"));
         }
     };
     

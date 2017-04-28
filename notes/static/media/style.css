@@ -190,6 +190,13 @@ a:hover{
 	height: 5em;
 }
 
+#404{
+	background: transparent url('images/burn.gif') top center no-repeat;
+	position: relative;
+	margin: auto;
+	width: 30em;
+}
+
 #primaryContent{
 	margin: 2em 3.0em 0em 0em;
 	padding: 0em 0em 0em 1.5em;
@@ -230,6 +237,29 @@ a:hover{
 
 .scrap a{
 	vertical-align: -70%;
+}
+
+/* Messages */
+
+.error_msg {
+    background: red url('images/scrap1.png') top center no-repeat;
+    border: 1px solid black;
+    z-index:3;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: center;
+	width: 40em;
+	height: 20em;
+}
+.success_msg {
+    background: blue url('images/scrap1.png') top center no-repeat;
+    border: 1px solid black;
+    z-index:3;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: center;
+	width: 200px;
+	height: 48px;
 }
 
 /* Footer */
